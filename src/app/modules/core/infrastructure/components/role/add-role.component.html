@@ -1,0 +1,118 @@
+<mat-card>
+    <mat-card-header class="header">
+        <mat-card-title>
+            <button mat-button class="btn btn-icon" title="Regresar" (click)="back()">
+                <mat-icon>keyboard_backspace</mat-icon>
+            </button>
+            Agregar Rol y Permisos
+        </mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="roleForm" (ngSubmit)="save()">
+        <mat-card-content>
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="fluid">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput formControlName="roleName" maxlength="100">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-8">
+                            <h5>Permisos</h5>
+                        </div>
+                    </div>
+                    <mat-divider [inset]="true"></mat-divider>
+                    <div class="row">
+                        <div class="col">
+
+                            <ul class="tree">
+
+                                <li *ngFor="let menu of menus">
+                                    <mat-icon *ngIf="(menu.submenu!.length || menu.actionMenus.length)"
+                                        (click)="menu.isCollapsed = !menu.isCollapsed">
+                                        {{menu.isCollapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}
+                                    </mat-icon>
+                                    <mat-checkbox [checked]="checkAll(menu)"
+                                        (change)="checkChilds(menu, $event.checked)"
+                                        [indeterminate]="someComplete(menu)"></mat-checkbox>
+                                    {{menu.menuName}}
+
+                                    <ul *ngIf="(menu.submenu!.length || menu.actionMenus.length) && menu.isCollapsed">
+                                        <li *ngFor="let submenu of menu.submenu">
+                                            <mat-icon *ngIf="(submenu.submenu!.length || submenu.actionMenus.length)"
+                                                (click)="submenu.isCollapsed = !submenu.isCollapsed">
+                                                {{submenu.isCollapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}}
+                                            </mat-icon>
+                                            <mat-checkbox (change)="checkChilds(submenu, $event.checked)"
+                                                [indeterminate]="someComplete(submenu)"
+                                                [checked]="checkAll(submenu)"></mat-checkbox>
+                                            {{submenu.menuName}}
+                                            <ul
+                                                *ngIf="(submenu.submenu!.length || submenu.actionMenus.length) && submenu.isCollapsed">
+
+                                                <li *ngFor="let _submenu of submenu.submenu">
+                                                    <mat-icon
+                                                        *ngIf="(  ( _submenu.submenu && _submenu.submenu.length) || (_submenu.actionMenus && _submenu.actionMenus.length))"
+                                                        (click)="_submenu.isCollapsed = !_submenu.isCollapsed">
+                                                        {{_submenu.isCollapsed ? 'keyboard_arrow_down' :
+                                                        'keyboard_arrow_right'}}
+                                                    </mat-icon>
+                                                    <mat-checkbox (change)="checkChilds(_submenu, $event.checked)"
+                                                        [checked]="checkAll(_submenu)"></mat-checkbox>
+                                                    {{_submenu.menuName}}
+
+                                                    <ul *ngIf="_submenu.actionMenus.length && _submenu.isCollapsed">
+                                                        <li class="actionMenu"
+                                                            *ngFor="let actionMenu of _submenu.actionMenus">
+                                                            <mat-checkbox
+                                                                (change)="actionMenu.isSelected = $event.checked"
+                                                                [checked]="actionMenu.isSelected"></mat-checkbox>
+                                                            Acción: {{actionMenu.actionMenuName}}
+                                                        </li>
+                                                    </ul>
+
+                                                </li>
+
+                                                <li class="actionMenu" *ngFor="let actionMenu of submenu.actionMenus">
+                                                    <mat-checkbox (change)="actionMenu.isSelected = $event.checked"
+                                                        [checked]="actionMenu.isSelected"></mat-checkbox>
+                                                    Acción: {{actionMenu.actionMenuName}}
+                                                </li>
+                                            </ul>
+
+                                        </li>
+                                        <li class="actionMenu" *ngFor="let actionMenu of menu.actionMenus">
+                                            <mat-checkbox (change)="actionMenu.isSelected = $event.checked"
+                                                [checked]="actionMenu.isSelected"></mat-checkbox>
+                                            Acción: {{actionMenu.actionMenuName}}
+                                        </li>
+                                    </ul>
+
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <mat-divider></mat-divider>
+            <br>
+            <div class="row">
+                <div class="col" align="right">
+
+                    <button mat-button class="btn backgroundSecundary ">
+                        <mat-icon>check</mat-icon>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </form>
+
+</mat-card>

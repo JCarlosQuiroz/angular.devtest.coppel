@@ -1,14 +1,29 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="backgroundPrimary" *ngIf="show" (showHide)="sidenav.toggle()">
   <a class="title" href="/">{{ title }}</a>
 
   <div class="toolbar-spacer"></div>
 
-  <a mat-button [routerLink]="['profile']">Profile</a>
+  <a mat-button [routerLink]="['profile']">Perfil</a>
 
-  <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
-  <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
+  <button type="submit" aria-label="login" mat-raised-button *ngIf="!loginDisplay" (click)="login()">Ingresar</button>
+  <button type="submit" aria-label="logout" mat-raised-button *ngIf="loginDisplay" (click)="logout()">Cerrar
+    Sesion</button>
 </mat-toolbar>
-<div class="container">
+
+<mat-sidenav-container class="sidenav-container " [ngClass]="{'backgroundDark': !show, 'sidenav-top': show}" fullscreen>
+
+
+  <mat-sidenav class="mt-nav-container backgroundPrimary" #sidenav [mode]="'side'">
+    <div class="v-scroll">
+      <!-- <side-nav *ngIf="show"></side-nav> -->
+    </div>
+  </mat-sidenav>
+
+
   <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
-  <router-outlet *ngIf="!isIframe"></router-outlet>
-</div>
+  <mat-sidenav-content>
+    <div class="container-fluid">
+      <router-outlet *ngIf="!isIframe"></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

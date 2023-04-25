@@ -1,10 +1,14 @@
-<div *ngIf="!loginDisplay">
-    <p class="welcome">Welcome to the MSAL.js v2 Angular Quickstart!</p>
-    <p>This sample demonstrates how to configure MSAL Angular to login, logout, protect a route, and acquire an access token for a protected resource such as the Microsoft Graph.</p>
-    <p>Please sign-in to see your profile information.</p>
+<div class="shadow mt-5 p-3 py-5 mx-5 mb-5 bg-body rounded" *ngIf="!loginDisplay">
+    <div class="justifyContentCenter">
+        <p class="welcome">¡Bienvenido al inicio rápido de MSAL.js v2 Angular!</p>
+        <p>Inicia sesión para ver la información de tu perfil.</p>
+    </div>
 </div>
 
-<div *ngIf="loginDisplay">
-    <p>Login successful!</p>
-    <p>Request your profile information by clicking Profile above.</p>
+
+
+<div class="shadow mt-5 p-3 py-5 mx-5 mb-5 bg-body rounded" *ngIf="loginDisplay">
+    <div class="justifyContentCenter">
+        <h3>¡Bienvenido a este demo!</h3>
+    </div>
 </div>

@@ -1,6 +1,248 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.container { margin: 1%; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.container {
+  margin: 1%;
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Monserrat', sans-serif;
+}
+
+.mat-card-title {
+  font-weight: bold;
+}
+
+.mat-drawer-container {
+  background: #edf3f8;
+  /* padding: 20px; */
+}
+
+
+.mat-card-header.header {
+  /* background-color:#337ab7 !important; */
+  padding: 5px !important;
+  border-bottom: 1px solid #e4e4e4;
+  border-top: 3px solid #7bb1db;
+}
+
+.mat-card {
+  padding: 0 !important;
+  margin-top: 15px;
+}
+
+.mat-card-content {
+  padding: 10px !important;
+}
+
+table.mat-table {
+  /* margin-top: 15px;  */
+  width: 100%;
+}
+
+.float-right {
+  float: right;
+}
+
+.aling-center {
+  text-align: center !important;
+}
+
+.aling-right {
+  text-align: right !important;
+}
+
+.mat-header-cell {
+  background: #fbfbfb;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.fluid {
+  width: 100%;
+}
+
+.btn {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.mat-form-field-appearance-outline>.mat-form-field-wrapper {
+  padding-bottom: 5px !important;
+}
+
+.btn-return {
+  padding-left: 3px !important;
+}
+
+.backgroundPrimary {
+  background: #100D23;
+  color: #fff;
+}
+
+.backgroundSecundary {
+  background: #742D8B;
+  color: #fff;
+}
+
+.backgroundDark {
+  background: #100D23;
+  color: #fff;
+}
+
+.backgroundLight {
+  background: #7bb1da;
+  color: #fff;
+}
+
+button.backgroundSecundary:hover {
+  background: #4988e6;
+  color: #fff;
+}
+
+button.backgroundPrimary {
+  background: #151e69;
+  color: #fff;
+}
+
+.mt-nav-container {
+  padding: 10px;
+}
+
+.colorSecundary {
+  color: #038fe7;
+}
+
+.colorSuccess {
+  color: #198754;
+}
+
+.colorGray {
+  color: rgb(112, 112, 112);
+}
+
+.icon-action {
+
+  width: 28px !important;
+}
+
+.icon-action mat-icon {
+  font-size: 20px !important;
+}
+
+.btn-white {
+  background: #fff !important;
+  color: #192169;
+}
+
+.mat-sidenav-filters {
+  position: fixed !important;
+  top: 64px !important;
+  padding: 15px !important;
+  max-width: 300px;
+  overflow: hidden;
+
+}
+
+.mat-sidenav-filters>.mat-drawer-inner-container {
+  overflow: hidden !important;
+}
+
+.mat-form-field-underline {
+  background-color: #8383836b !important;
+
+}
+
+
+.mat-sidenav-filters .footer {
+  bottom: 0px;
+  position: absolute;
+  border-top: 1px solid rgb(218, 218, 218);
+  height: 50px;
+  padding-top: 5px;
+  text-align: right;
+}
+
+.container-fluid {
+  width: 100%;
+  padding-right: var(--bs-gutter-x, .75rem);
+  padding-left: var(--bs-gutter-x, .75rem);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.mat-paginator {
+  box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024, 0 3px 14px 2px #0000001f;
+}
+
+.container-table {
+  height: 730px;
+  overflow: auto;
+  margin-top: 15px;
+  padding-right: var(--bs-gutter-x, .75rem);
+  padding-left: var(--bs-gutter-x, .75rem);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.container-table::-webkit-scrollbar {
+  width: 4px;
+  top: 5px
+}
+
+.container-table::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.container-table::-webkit-scrollbar-thumb {
+  background-color: #7bb1da;
+  outline: 1px solid #7bb1da;
+}
+
+.mt-nav-container {
+  padding: 0px !important;
+}
+
+.justifyContentCenter {
+  display: flex;
+  justify-content: center;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+.thead-gray {
+  background: #f5f4f4;
+}
+
+mat-form-field {
+  font-size: 12px !important;
+}

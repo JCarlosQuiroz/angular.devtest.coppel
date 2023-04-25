@@ -1,7 +1,39 @@
 .toolbar-spacer {
-    flex: 1 1 auto;
-  }
-  
-  a.title {
-    color: white;
-  }
+  flex: 1 1 auto;
+}
+
+a.title {
+  color: white;
+}
+
+.container-fluid {
+  padding: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.v-scroll {
+  height: 100%;
+  /* overflow-y: hidden;  */
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.v-scroll::-webkit-scrollbar {
+  width: 2px !important;
+  top: 5px !important;
+}
+
+.v-scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.v-scroll::-webkit-scrollbar-thumb {
+  background-color: #7bb1da;
+  outline: 1px solid #7bb1da;
+}
+
+.sidenav-top {
+  top: 64px !important;
+}

@@ -1,0 +1,235 @@
+<mat-sidenav-container class="example-container"  >
+    <mat-sidenav class=" mat-sidenav-filters" #sidenav [mode]="'side'"  position="end">
+        <div class="input-group mb-3">
+            <mat-icon>filter_list</mat-icon>
+            &nbsp;
+            <h4>
+                Filtros
+            </h4>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="row">
+            <!-- INPUT PARA FILTRO: #NOMBRE USUARIO# -->
+            <div class="col">
+                <mat-form-field appearance="outline" class="fluid">
+                    <mat-label>Usuario</mat-label>
+                    <input
+                        matInput
+                        maxlength="100"
+                        autocomplete="off"
+                        [(ngModel)]="username"
+                    >
+                </mat-form-field>
+            </div>
+            <!-- INPUT PARA FILTRO: #PRIMER NOMBRE# -->
+            <div class="col">
+                <mat-form-field appearance="outline" class="fluid">
+                    <mat-label>Primer nombre</mat-label>
+                    <input
+                        matInput
+                        maxlength="100"
+                        autocomplete="off"
+                        [(ngModel)]="firstName"
+                    >
+                </mat-form-field>
+            </div>
+            <!-- INPUT PARA FILTRO: #SEGUNDO NOMBRE# -->
+            <div class="col">
+                <mat-form-field appearance="outline" class="fluid">
+                    <mat-label>Segundo nombre</mat-label>
+                    <input
+                        matInput
+                        maxlength="100"
+                        autocomplete="off"
+                        [(ngModel)]="secondName"
+                    >
+                </mat-form-field>
+            </div>
+            <!-- INPUT PARA FILTRO: #APELLIDO MATERNO# -->
+            <div class="col">
+                <mat-form-field appearance="outline" class="fluid">
+                    <mat-label>Apellido materno</mat-label>
+                    <input
+                        matInput
+                        maxlength="100"
+                        autocomplete="off"
+                        [(ngModel)]="lastName"
+                    >
+                </mat-form-field>
+            </div>
+            <!-- INPUT PARA FILTRO: #APELLIDO PATERNO# -->
+            <div class="col">
+                <mat-form-field appearance="outline" class="fluid">
+                    <mat-label>Apellido paterno</mat-label>
+                    <input
+                        matInput
+                        maxlength="100"
+                        autocomplete="off"
+                        [(ngModel)]="secondLastName"
+                    >
+                </mat-form-field>
+            </div>
+             <!-- COMBO PARA FILTRO: #ESTATUS# -->
+             <div class="col">
+                <mat-form-field appearance="outline" class="fluid">
+                    <mat-label>Estatus</mat-label>
+                    <mat-select [(ngModel)]="idStatus" [ngModelOptions]="{standalone: true}">
+                        <mat-option value="0">Seleccione...</mat-option>
+                        <mat-option *ngFor="let status of statusList" [value]="idStatus">
+                            {{status}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="footer" >
+                <button mat-button class="btn btn-sm btn-secondary" (click)="cleanFilters()">Limpiar</button>
+                &nbsp;
+                <button type="button" class="btn btn-sm backgroundSecundary" (click)="applyFilter()">Aplicar Filtros</button>
+            </div>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-6">
+                    <h3>
+                        <b>
+                            Lista de Usuarios
+                        </b>
+                    </h3>
+                </div>
+                <div class="col-6" align="right">
+
+                    &nbsp;
+
+                    <a [routerLink]="['/user/users/add']" mat-button class="btn btn-success ">
+                        <mat-icon>add</mat-icon>
+                        <span>Agregar Usuario</span>
+                    </a>
+
+                    &nbsp;
+
+                    <button (click)="sidenav.toggle()"  mat-button class="btn btn-white ">
+                        <mat-icon>filter_list</mat-icon>
+                        <span>Filtros</span>
+                    </button>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="container-table">
+                <table mat-table [dataSource]="userList" matSort class="mat-elevation-z8" matTableExporter>
+
+                    <!-- ID -->
+                    <ng-container matColumnDef="idUser">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                        <td mat-cell *matCellDef="let element"> {{element.idUser}} </td>
+                    </ng-container>
+
+                    <!-- Nombre -->
+                    <ng-container matColumnDef="userName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de usuario </th>
+                        <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="person">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Asignado </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{
+                                (element.person['firstName']      != null ? element.person['firstName']      : '') + ' ' +
+                                (element.person['middleName']     != null ? element.person['middleName']     : '') + ' ' +
+                                (element.person['lastName']       != null ? element.person['lastName']       : '') + ' ' +
+                                (element.person['secondLastName'] != null ? element.person['secondLastName'] : '')
+                                | titlecase
+                            }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="roleName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol/Roles </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ getRolesFromUser(element.roles) }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                        <td mat-cell *matCellDef="let element"> {{ getStatusName(element.status) }} </td>
+                    </ng-container>
+
+                    <!-- Acciones -->
+                    <ng-container  matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef class="aling-center"> Acciones </th>
+                        <td mat-cell *matCellDef="let element" class="aling-center">
+
+                            <button *ngIf="getStatusName(element.status) == 'Eliminado' else TemplateAcciones"
+                            type="button"
+                            mat-icon-button
+                            class="colorGray icon-action"
+                            title="Alerta"
+                            (click)="MessageDelete()"
+                            >
+                                <mat-icon>report</mat-icon>
+                            </button>
+
+                            <ng-template #TemplateAcciones>
+                                <button
+                                type="button"
+                                mat-icon-button
+                                class="colorGray icon-action"
+                                title="Actualizar"
+                                [routerLink]="['/user/users/add', element.idUser]"
+                                [disabled]="element.status == userStatus.DISABLE || element.status == userStatus.DELETE"
+                                >
+                                    <mat-icon >edit</mat-icon>
+                                </button>
+
+                                <!-- <button
+                                    type="button"
+                                    mat-icon-button
+                                    class="colorGray icon-action"
+                                    title="Habilitar"
+                                    (click)="enableItem(element)"
+                                    [disabled]="element.status == userStatus.ENABLE || element.status == userStatus.DELETE"
+                                >
+                                    <mat-icon >check</mat-icon>
+                                </button> -->
+
+                                <!-- <button
+                                    type="button"
+                                    mat-icon-button
+                                    class="colorGray icon-action"
+                                    title="Deshabilitar"
+                                    (click)="disableItem(element)"
+                                    [disabled]="element.status == userStatus.DISABLE  || element.status == userStatus.DELETE"
+                                >
+                                    <mat-icon >remove</mat-icon>
+                                </button> -->
+
+                                <!-- <button
+                                    type="button"
+                                    mat-icon-button
+                                    class="colorGray icon-action"
+                                    (click)="deleteItem(element)"
+                                    title="Eliminar"
+                                    [disabled]="element.status == userStatus.DISABLE || element.status == userStatus.DELETE"
+                                >
+                                    <mat-icon >delete</mat-icon>
+                                </button> -->
+                            </ng-template>
+
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                </table>
+                <mat-paginator [pageSizeOptions]="[10]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

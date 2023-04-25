@@ -13,21 +13,21 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'Sample App - Dev Test Coppel';
   isIframe = false;
   loginDisplay = false;
+  show: boolean = false;
 
-  //variables para logearse por db
-  // user: User;
-  // show: boolean;
+
   private readonly _destroying$ = new Subject<void>();
 
   constructor(
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
     private authService: MsalService,
     private msalBroadcastService: MsalBroadcastService,
-    // private userInteractor: UserInteractor
+
   ) { }
 
   ngOnInit(): void {
     this.isIframe = window !== window.parent && !window.opener;
+
 
     this.msalBroadcastService.inProgress$
       .pipe(
@@ -37,18 +37,11 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.setLoginDisplay();
       });
-
-    // this.userInteractor.getUserSession().subscribe(user => {
-    //   if (user) {
-    //     this.show = true;
-    //   } else {
-    //     this.show = false;
-    //   }
-    // });
   }
 
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+    this.show = this.loginDisplay;
   }
 
   login() {

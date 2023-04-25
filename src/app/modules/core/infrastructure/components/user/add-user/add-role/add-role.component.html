@@ -1,0 +1,30 @@
+<form action="" [formGroup]="roleForm" (ngSubmit)="add()" >
+    <mat-card>
+        <mat-card-header >
+            <mat-card-title>
+                Agregar Rol al usuario
+            </mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="fluid">
+                        <mat-label>Rol</mat-label>
+                        <mat-select formControlName="roles" required >
+                            <mat-option *ngFor="let role of roleList" [value]="role">{{role.roleName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <mat-divider></mat-divider>
+            <div class="row">
+                <div class="col" align="right">
+                    <button mat-button class="btn backgroundSecundary">Agregar</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</form>

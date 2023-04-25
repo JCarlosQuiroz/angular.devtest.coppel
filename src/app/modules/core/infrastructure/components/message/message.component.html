@@ -1,0 +1,27 @@
+<div class="container" align="center">
+    <div class="row " style="padding-top:15px;">
+        <div class="col-md" >
+
+            <mat-icon class="{{icon}}">{{icon}}</mat-icon>
+        </div>
+    </div>
+    <div class="row row ">
+        <div class="col-md-10 offset-md-1"><h4>{{data.title}}</h4></div>
+    </div>
+    <div class="row content row ">
+        <div class="col-10 offset-md-1">
+            <p style="white-space: pre-line">{{data.message}}</p>
+        </div>
+    </div>
+    <div class="row ustify-content-center" style="padding-bottom:15px;" *ngIf="isPrompt">
+        <div class="col-10 offset-md-1">
+            <textarea name="name" [ngClass]="{'is-invalid' : isInvalid && !textMessage}" rows="4" [(ngModel)]="textMessage" class="form-control"></textarea>
+        </div>
+    </div>
+    <div class="row footer">
+        <div class="col">
+            <button class="btn btn-light btn-sm" *ngIf="isConfirm || isPrompt" style="margin-right: 5px;" (click)="closeModal(false)">Cancelar</button>
+            <button class="btn backgroundSecundary btn-sm" (click)="closeModal(true)">Aceptar</button>
+        </div>
+    </div>
+</div>

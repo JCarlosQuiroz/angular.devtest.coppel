@@ -1,0 +1,21 @@
+.container {
+    
+    margin-top: 50px;
+}
+
+h2{
+    color: #192169 !important;
+}
+
+.welcome {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.img {
+    width: 200px;height:100px;margin-top:20px
+}
+
+.loginButton {
+    height: 45px; font-size: 18px;
+}

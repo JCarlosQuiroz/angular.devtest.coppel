@@ -1,0 +1,44 @@
+<mat-toolbar class="example-toolbar backgroundDark">
+  <div class="row fluid">
+    <div class="col-4">
+      <button mat-icon-button (click)="showHideNav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      &nbsp;
+      <a [routerLink]="['']">
+        <img src="assets/images/official04.svg" alt="" style="width:150px; height:40px;">
+      </a>
+
+    </div>
+
+    <div class="col-8" align="right">
+      <button mat-button type="button" class="btn" style="color:#fff; outline: none !important;"
+        [matMenuTriggerFor]="beforeMenu">
+        <mat-icon style="margin-bottom: 5px;">person</mat-icon>
+        {{user.person.firstName}} {{user.person.middleName}} {{user.person.lastName}} {{user.person.secondLastName}}
+        <mat-icon style="margin-bottom: 5px;">keyboard_arrow_down</mat-icon>
+      </button>
+    </div>
+
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+
+      <!-- <button mat-menu-item>
+                <mat-icon>person</mat-icon>
+                Perfil
+            </button> -->
+
+      <!-- <button mat-menu-item>
+                <mat-icon>vpn_key</mat-icon>
+                Cambiar Contraseña
+            </button> -->
+
+      <!-- <mat-divider></mat-divider> -->
+
+      <button mat-menu-item (click)="closeSession()">
+        <i class="fa fa-sign-out sign-out-icon "></i>
+        Cerrar sesión
+      </button>
+
+    </mat-menu>
+  </div>
+</mat-toolbar>

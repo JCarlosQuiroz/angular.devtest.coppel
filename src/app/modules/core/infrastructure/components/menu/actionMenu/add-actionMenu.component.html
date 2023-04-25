@@ -1,0 +1,29 @@
+<form action="" [formGroup]="actionMenuForm" (ngSubmit)="add()" >
+    <mat-card>
+        <mat-card-header >
+            <mat-card-title>
+                Agregar Acciones de Menú
+            </mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="fluid">
+                        <mat-label>Nombre</mat-label>
+                        <input 
+                            matInput
+                            formControlName="actionMenuName"
+                        >
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row">
+                <div class="col" align="right">
+                    <button mat-button class="btn backgroundSecundary">Agregar</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</form>

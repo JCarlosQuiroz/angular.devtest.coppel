@@ -19,6 +19,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { SchedulerModule } from 'angular-calendar-scheduler';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FilterData } from './modules/core/infrastructure/shared/pipes/filter-data';
+import { AuthInterceptorService } from './modules/core/infrastructure/shared/services/auth.interceptor';
 import {
   IPublicClientApplication,
   PublicClientApplication,
@@ -40,6 +42,9 @@ import {
   MsalInterceptor,
 } from '@azure/msal-angular';
 import { HomeComponent } from './modules/core/infrastructure/components/home/home.component';
+import { SideNavComponent } from './modules/core/infrastructure/components/side-nav/sidenav.component';
+import { ToolbarComponent } from './modules/core/infrastructure/components/toolbar/toolbar.component';
+import { CoreComponents, CoreModule } from './modules/core/config/core.module';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -117,7 +122,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    CoreComponents,
+    SideNavComponent,
+    ToolbarComponent,
+    FilterData,
     ProfileComponent,
     LettersDirective,
     AlphanumericDirective,
@@ -136,17 +144,18 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalModule,
     ReactiveFormsModule,
     FormsModule,
+    MatModules,
     SchedulerModule.forRoot({ locale: 'en', headerDateFormat: 'daysRange', logEnabled: true }),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    MatModules,
+    CoreModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: MsalInterceptor,
+      useClass: MsalInterceptor && AuthInterceptorService,
       multi: true,
     },
     {

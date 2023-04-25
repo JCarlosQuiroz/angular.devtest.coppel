@@ -1,0 +1,64 @@
+<div class="sidenav-container">
+  <br>
+  <form class="input-group mb-3 container" [formGroup]="formGroup">
+    <input type="text" class="form-control" placeholder="Buscar..." formControlName="filter">
+  </form>
+  <ol class="sidenav-content" *ngFor="let parent of filteredOptions | async">
+    <ul class="sidenav-parent">
+      <li class="sidenav-item" *ngIf="parent.submenu!.length" [routerLink]="[parent.url]">
+        <div style="width:90%">
+          <i class="fa {{parent.icon}}"></i>
+          &nbsp;
+          {{parent.menuName}}
+        </div>
+      </li>
+    </ul>
+    <ul class="sidenav-parent" *ngIf="parent.submenu!.length">
+      <li class="sidenav-item" (click)="parent.isCollapsed = !parent.isCollapsed">
+        <div style="width:90%;">
+          <i class="fa {{parent.icon}}"></i>
+          &nbsp;
+          {{parent.menuName}}
+        </div>
+        <div style="width:10%">
+          <mat-icon class="float-right">{{parent.isCollapsed ? 'keyboard_arrow_right' :
+            'keyboard_arrow_down'}}</mat-icon>
+        </div>
+      </li>
+      <ul class="sidenav-subcontent" *ngFor="let submenu of parent.submenu "
+        [ngClass]="{'isCollapsed': !parent.isCollapsed}">
+        <li *ngIf="submenu.submenu!.length" [routerLink]="[submenu.url]" class="sidenav-subitem">
+          <div style="width:90%">
+            <i class="fa {{submenu.icon}}"></i>
+            &nbsp;
+            {{submenu.menuName}}
+          </div>
+        </li>
+        <ul class="sidenav-subcontent" *ngIf="submenu.submenu!.length">
+          <li class="sidenav-item" (click)="submenu.isCollapsed = !submenu.isCollapsed">
+            <div style="width:90%;">
+              <i class="fa {{submenu.icon}}"></i>
+              &nbsp;
+              {{submenu.menuName}}
+            </div>
+            <div style="width:10%">
+              <mat-icon class="float-right">{{submenu.isCollapsed ? 'keyboard_arrow_right' :
+                'keyboard_arrow_down'}}</mat-icon>
+            </div>
+          </li>
+          <ul class="sidenav-subcontent" *ngFor="let _submenu of submenu.submenu"
+            [ngClass]="{'isCollapsed': !submenu.isCollapsed}">
+            <li [routerLink]="[_submenu.url]" class="sidenav-subitem">
+              <div style="width: 10%;"></div>
+              <div style="width:90%">
+                <i class="fa {{_submenu.icon}}"></i>
+                &nbsp;
+                {{_submenu.menuName}}
+              </div>
+            </li>
+          </ul>
+        </ul>
+      </ul>
+    </ul>
+  </ol>
+</div>

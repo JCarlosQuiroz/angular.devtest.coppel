@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  loginDisplay = false;
+  loginDisplay = true;
 
   constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService) { }
 
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
         this.authService.instance.setActiveAccount(payload.account);
         this.setLoginDisplay();
       });
-      this.setLoginDisplay();
+    this.setLoginDisplay();
   }
 
   setLoginDisplay() {
